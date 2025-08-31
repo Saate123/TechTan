@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empowering Teachers with Tech Skills to Learn, Earn & Lead</title>
+    <link rel="icon" type="image/x-icon" href="https://harvoxx.com/stb.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <style>
+      :root {
+        --dark-blue: #1a3d6a;
+        --orange: #d97746;
+        --button-blue: #3b6ea2;
+        --light-gray-bg: #f8f9fa;
+        --text-dark: #333333;
+        --text-light: #ffffff;
+        --border-color: #e0e0e0;
+      }
+
+      /* Animation Keyframes */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Loader Styles */
+      .loader-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid #fff;
+        border-bottom-color: var(--orange);
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Hide elements initially */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+
+      /* Class added by Intersection Observer when element becomes visible */
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background-color: #e9ecef;
+        color: var(--text-dark);
+        scroll-behavior: smooth;
+      }
+
+      .container {
+        /* max-width: 960px; */
+        margin: 0 auto;
+        background-color: var(--text-light);
+      }
+
+      /* Header Section with Animation */
+      .header-section {
+        background-color: var(--dark-blue);
+        color: var(--text-light);
+        padding: 50px 30px;
+        text-align: center;
+      }
+
+      .header-section h1 {
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin: 0 0 15px 0;
+        line-height: 1.2;
+      }
+
+      .header-section .subtitle {
+        font-size: 1.1rem;
+        margin: 0 0 25px 0;
+        opacity: 0.9;
+      }
+
+      .header-details {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        margin-bottom: 35px;
+        font-size: 0.9rem;
+      }
+
+      .header-details span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .header-details .icon-small {
+        width: 16px;
+        height: 16px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 14px 28px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .btn-primary {
+        background-color: var(--orange);
+        color: var(--text-light);
+      }
+
+      .btn-primary:hover {
+        background-color: #c86a3a;
+      }
+
+      /* Benefits Intro Section with Animation */
+      .benefits-intro {
+        display: flex;
+        justify-content: space-around;
+        padding: 50px 30px;
+        gap: 30px;
+        text-align: center;
+      }
+
+      .benefit-item {
+        flex: 1;
+        max-width: 250px;
+      }
+
+      .benefit-item .icon-wrapper {
+        margin: 0 auto 15px auto;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--dark-blue);
+      }
+
+      .benefit-item .icon-large {
+        width: 32px;
+        height: 32px;
+      }
+
+      .benefit-item h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--dark-blue);
+      }
+
+      .benefit-item p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      /* Main Content Layout */
+      .main-content-wrapper {
+        display: flex;
+        gap: 40px;
+        padding: 0 30px 50px 30px;
+      }
+
+      .left-column {
+        flex: 1.1;
+      }
+
+      .right-column {
+        flex: 1;
+      }
+
+      .main-image {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 40px;
+        display: block;
+      }
+
+      /* Why Register Section with Animation */
+      .why-register h2,
+      .form-container h2,
+      .what-you-gain h2 {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--dark-blue);
+        margin-bottom: 30px;
+      }
+
+      .reason {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        margin-bottom: 25px;
+      }
+
+      .reason:nth-child(1) {
+        animation-delay: 0.3s;
+      }
+
+      .reason:nth-child(2) {
+        animation-delay: 0.6s;
+      }
+
+      .reason:nth-child(3) {
+        animation-delay: 0.9s;
+      }
+
+      .icon-wrapper-small {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #eaf0f6;
+        border-radius: 50%;
+        color: var(--button-blue);
+      }
+
+      .icon-wrapper-small svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .reason-text h4 {
+        margin: 0 0 5px 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .reason-text p {
+        margin: 0;
+        line-height: 1.6;
+        color: #555;
+        font-size: 0.95rem;
+      }
+
+      .cta-box {
+        background-color: var(--orange);
+        color: var(--text-light);
+        padding: 25px;
+        border-radius: 8px;
+        margin-top: 40px;
+      }
+
+      .cta-box h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+
+      .cta-box p {
+        margin: 0;
+        line-height: 1.5;
+        opacity: 0.95;
+      }
+
+      /* Form Container with Animation */
+      .form-container {
+        background-color: var(--light-gray-bg);
+        padding: 30px;
+        border-radius: 8px;
+        position: relative;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      form input,
+      form select {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 0;
+        font-size: 1rem;
+        font-family: "Inter", sans-serif;
+        color: #333;
+      }
+
+      form input {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        background-color: transparent;
+        border-radius: 0;
+      }
+
+      form input:focus {
+        outline: none;
+        border-bottom-color: var(--button-blue);
+      }
+
+      form select {
+        padding: 12px 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        background-color: #fff;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23666'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 1.5em 1.5em;
+      }
+
+      .btn-secondary {
+        background-color: var(--button-blue);
+        color: var(--text-light);
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .btn-secondary:hover {
+        background-color: #325f8d;
+      }
+
+      .form-footer-text {
+        font-size: 0.85rem;
+        color: #666;
+        line-height: 1.5;
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      /* Course Selection Styles */
+      .course-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .course-section {
+        margin-bottom: 15px;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid var(--border-color);
+      }
+
+      .course-section-title {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 0 0 10px 0;
+      }
+
+      .course-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .course-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .course-item input[type="checkbox"],
+      .course-item input[type="radio"] {
+        width: auto;
+        margin-right: 10px;
+      }
+
+      .course-item label {
+        font-size: 0.95rem;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .course-item input[type="checkbox"]:disabled + label,
+      .course-item input[type="radio"]:disabled + label {
+        color: #666;
+        font-weight: 500;
+      }
+
+      /* What You Gain Section with Animation */
+      .what-you-gain {
+        margin-top: 40px;
+      }
+
+      .gains-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      .gain-item {
+        background-color: var(--light-gray-bg);
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .gain-item:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+
+      .gain-item:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+
+      .gain-item:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+
+      .gain-item:nth-child(4) {
+        animation-delay: 0.8s;
+      }
+
+      .icon-wrapper-gain {
+        color: var(--button-blue);
+        margin-bottom: 10px;
+      }
+
+      .icon-wrapper-gain svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .gain-item h4 {
+        margin: 0 0 8px 0;
+        font-weight: 600;
+      }
+
+      .gain-item p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #555;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 860px) {
+        .main-content-wrapper {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .header-section h1 {
+          font-size: 2rem;
+        }
+
+        .benefits-intro {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .gains-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .main-content-wrapper {
+          padding: 0 20px 40px 20px;
+        }
+
+        .header-details {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+      .success-card {
+        background: #e6ffed;
+        border: 1px solid #4ade80;
+        color: #166534;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 0.95rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 55%;
+        left: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header Section -->
+      <header class="header-section fade-in">
+        <h1>Summer Tech Bootcamp for Teachers</h1>
+        <p class="subtitle">
+          Empowering Teachers with Tech Skills to Learn, Earn & Lead
+        </p>
+        <div class="header-details">
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="icon-small"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+              />
+            </svg>
+            Port Harcourt
+          </span>
+          <span>6 Weeks</span>
+          <span>Open to Nursery, Primary & Secondary School Teachers</span>
+        </div>
+        <a href="#registration-form" class="btn btn-primary"
+          >Limited Slots Available - Register Now!</a
+        >
+      </header>
+
+      <!-- Learn, Grow, Earn Section -->
+      <section class="benefits-intro">
+        <div class="benefit-item fade-in">
+          <div class="icon-wrapper book-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="icon-large"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6-2.292m0 0V3.75m0 16.5a8.967 8.967 0 0 1-6 2.292c-1.052 0-2.062-.18-3-.512m0 0V3.75m3 .512A8.966 8.966 0 0 1 6 3.75m12 16.5a8.966 8.966 0 0 0 6-2.292c1.052 0 2.062.18 3-.512M18 3.75a8.966 8.966 0 0 0-6 2.292m0 0V3.75"
+              />
+            </svg>
+          </div>
+          <h3>Learn</h3>
+          <p>
+            Get hands on training in All Digital Monuiring, Data Analytics &
+            More
+          </p>
+        </div>
+        <div class="benefit-item fade-in">
+          <div class="icon-wrapper grow-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="icon-large"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 2.25 21 9.75l-4.5 4.5m-5.25 0L1.5 9.75 6 5.25m9 9.75-4.5-4.5m0 0-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+              />
+            </svg>
+          </div>
+          <h3>Grow</h3>
+          <p>
+            Improve your treaching, upgrade your career or, and grow your value.
+          </p>
+        </div>
+        <div class="benefit-item fade-in">
+          <div class="icon-wrapper earn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="icon-large"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m15 3a3 3 0 1 1-6 0m6 0h-3m-3 0h-3m-6 3a2.25 2.25 0 0 0 2.25 2.25h13.5A2.25 2.25 0 0 0 21 15m-4.5-6a3 3 0 0 0-3-3m-3 0a3 3 0 0 0-3 3m0 0h6M3 12h18"
+              />
+            </svg>
+          </div>
+          <h3>Earn</h3>
+          <p>
+            Discover how to monetize, your skills and earn beyond the classroom
+          </p>
+        </div>
+      </section>
+
+      <div class="main-content-wrapper">
+        <!-- Left Column -->
+        <main class="left-column">
+          <img
+            src="img.png"
+            alt="A teacher helping two students on a laptop"
+            class="main-image fade-in"
+          />
+          <section class="why-register">
+            <h2 class="fade-in">Why You Should Register</h2>
+            <div class="reason fade-in">
+              <div class="icon-wrapper-small">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.311a7.5 7.5 0 0 1-3.75 0M12 12.75h.008v.008H12v-.008Z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 3c-.907 0-1.787.121-2.622.342-.16.042-.294.135-.4-.257l-.106-.319a2.25 2.25 0 0 1 .499-2.521c.52-.52 1.258-.812 2.02-.812a2.25 2.25 0 0 1 2.02.812c.52.52.812 1.258.812 2.02 0 .762-.292 1.5-.812 2.02-.122.122-.268.224-.424.293l-.106.319a.67.67 0 0 1-.4.257A10.435 10.435 0 0 1 12 3Z"
+                  />
+                </svg>
+              </div>
+              <div class="reason-text">
+                <h4>Intensive Training</h4>
+                <p>
+                  Get access to a works of + hands training by industry experts.
+                </p>
+              </div>
+            </div>
+            <div class="reason fade-in">
+              <div class="icon-wrapper-small">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                  />
+                </svg>
+              </div>
+              <div class="reason-text">
+                <h4>Certification + Career Support</h4>
+                <p>
+                  Receive a recognized certificate and a one, on one session to
+                  guide your tech joerney.
+                </p>
+              </div>
+            </div>
+            <div class="reason fade-in">
+              <div class="icon-wrapper-small">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                  />
+                </svg>
+              </div>
+              <div class="reason-text">
+                <h4>Join the Teachers In Tech Communiinty</h4>
+                <p>
+                  Become part of A growing community or digital savey teachers.
+                </p>
+              </div>
+            </div>
+          </section>
+          <div class="cta-box fade-in">
+            <h3>Don't just teach - become a Tech-Smart Teacher.</h3>
+            <p>Register today and secure your space Sensore timited!</p>
+          </div>
+        </main>
+
+        <!-- Right Column -->
+        <aside class="right-column">
+          <section class="form-container fade-in" id="registration-form">
+            <h2>Register for the Bootcamp</h2>
+            <form id="registrationForm">
+              <div class="form-group">
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  id="full-name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter email address"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="tel"
+                  id="phone"
+                  placeholder="Enter phone number"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="tel"
+                  id="cgpa"
+                  placeholder="Enter C.G.P.A"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="referral-code"
+                  placeholder="Enter referral code if you have one"
+                  style="flex: 1"
+                />
+                <span
+                  id="verification-status"
+                  style="display: none; font-size: 0.85rem; margin-top: 5px"
+                ></span>
+                <span
+                  id="referral-error"
+                  style="color: red; font-size: 0.9em; display: none"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <select id="gender" required>
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <select id="i-am-a" required>
+                  <option value="">Level</option>
+                  <option value="100L">100L</option>
+                  <option value="200L">200L</option>
+                  <option value="300L">300L</option>
+                  <option value="400L">400L</option>
+                  <option value="500L">500L</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="course-label">Courses</label>
+                <!-- Compulsory Courses -->
+                <div class="course-section">
+                  <p class="course-section-title">Compulsory Courses:</p>
+                  <div class="course-item">
+                    <input type="checkbox" checked disabled />
+                    <label>General Digital Literacy</label>
+                  </div>
+                  <div class="course-item">
+                    <input type="checkbox" checked disabled />
+                    <label>AI Tools</label>
+                  </div>
+                </div>
+                <!-- Optional Courses -->
+                <div class="course-section">
+                  <p class="course-section-title">
+                    Select Additional Course (Choose one):
+                  </p>
+
+                  <div class="course-item">
+                    <input
+                      type="radio"
+                      name="additional_course"
+                      value="product-design"
+                      id="product-design"
+                    />
+                    <label for="product-design">Product Design</label>
+                  </div>
+                  <div class="course-item">
+                    <input
+                      type="radio"
+                      name="additional_course"
+                      value="data-analytics"
+                      id="data-analytics"
+                    />
+                    <label for="data-analytics">Data Analytics</label>
+                  </div>
+                  <div class="course-item">
+                    <input
+                      type="radio"
+                      name="additional_course"
+                      value="web-development"
+                      id="web-development"
+                    />
+                    <label for="web-development">Web Development</label>
+                  </div>
+                  <div class="course-item">
+                    <input
+                      type="radio"
+                      name="additional_course"
+                      value="product-management"
+                      id="product-management"
+                    />
+                    <label for="product-management">Product Management</label>
+                  </div>
+                  <div class="course-item">
+                    <input
+                      type="radio"
+                      name="additional_course"
+                      value="cyber-security"
+                      id="cyber-security"
+                    />
+                    <label for="cyber-security">Cyber Security</label>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-secondary">Register</button>
+            </form>
+            <p class="form-footer-text">
+              Your slot will be reserved after payment confirmation. You'll also
+              receive a welcome email.
+            </p>
+
+            <div
+              id="success-message"
+              class="success-card"
+              style="display: none"
+            >
+              <h3>Registration Successful</h3>
+              <p>
+                Selected candidates will be contacted via mail for the date of
+                examination. Thank you for registering!
+              </p>
+            </div>
+          </section>
+
+          <section class="what-you-gain">
+            <h2 class="fade-in">What You Will Gain</h2>
+            <div class="gains-grid">
+              <div class="gain-item fade-in">
+                <div class="icon-wrapper-gain">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.5 4.5 0 0 0 2.25 15Z"
+                    />
+                  </svg>
+                </div>
+                <h4>Tech Confidence</h4>
+                <p>
+                  Learn how to use digital tools in and out of the classroom
+                  confidently.
+                </p>
+              </div>
+              <div class="gain-item fade-in">
+                <div class="icon-wrapper-gain">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                </div>
+                <h4>Extra Income Impact</h4>
+                <p>
+                  ⁠Discover how to earn online with content creation, marketing,
+                  and freelancing.
+                </p>
+              </div>
+              <div class="gain-item fade-in">
+                <div class="icon-wrapper-gain">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.774ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                </div>
+                <h4>Practical Tool Skills</h4>
+                <p>
+                  ⁠Master AI tools, social media marketing, Excel, Power BI,
+                  SQL, and more.
+                </p>
+              </div>
+              <div class="gain-item fade-in">
+                <div class="icon-wrapper-gain">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-2.253 9.597 9.597 0 0 0-1.255-1.488a7.5 7.5 0 0 0-9.434 2.253Z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 9.75A4.5 4.5 0 0 1 6.75 5.25h10.5a4.5 4.5 0 0 1 4.5 4.5v3.75a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V9.75Z"
+                    />
+                  </svg>
+                </div>
+                <h4>Better Student Impact</h4>
+                <p>
+                  Teach more effectively using digital strategies that students
+                  love
+                </p>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <div class="loader-overlay">
+      <div class="loader"></div>
+    </div>
+
+    <script>
+      // Smooth scroll function
+      document
+        .querySelector('a[href="#registration-form"]')
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetElement = document.querySelector("#registration-form");
+          const headerOffset = 30;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        });
+
+      // Initialize Intersection Observer
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "50px",
+        }
+      );
+
+      document.querySelectorAll(".fade-in").forEach((element) => {
+        observer.observe(element);
+      });
+
+      // Loader functions
+      const showLoader = () => {
+        document.querySelector(".loader-overlay").style.display = "flex";
+      };
+
+      const hideLoader = () => {
+        document.querySelector(".loader-overlay").style.display = "none";
+      };
+
+      // ✅ Allowed referral codes
+      const validReferralCodes = ["HARVOXX100", "DSP100C3", "SUMMER25"];
+
+      // Helper: scroll to invalid input
+      function scrollToInput(input) {
+        const headerOffset = 30;
+        const elementPosition = input.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+
+        input.focus();
+      }
+
+      // Form submission
+      async function handleSubmit(e) {
+        e.preventDefault();
+
+        const fullName = document.getElementById("full-name");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const gender = document.getElementById("gender");
+        const studentLevel = document.getElementById("i-am-a");
+        const cgpa = document.getElementById("cgpa");
+        const referralCodeInput = document.getElementById("referral-code");
+        const referralCode = referralCodeInput.value.trim();
+
+        const referralError = document.getElementById("referral-error");
+        referralError.style.display = "none"; // reset state
+
+        const selectedCourses = ["General Digital Literacy", "AI Tools"];
+        const additionalCourseElement = document.querySelector(
+          'input[name="additional_course"]:checked'
+        );
+
+        // Validate additional course
+        if (!additionalCourseElement) {
+          alert("Please select an additional course");
+          scrollToInput(
+            document.querySelector('input[name="additional_course"]')
+          );
+          return false;
+        }
+        selectedCourses.push(additionalCourseElement.value);
+
+        // Validate required fields
+        if (!fullName.value) {
+          alert("Full Name is required");
+          scrollToInput(fullName);
+          return false;
+        }
+        if (!email.value) {
+          alert("Email is required");
+          scrollToInput(email);
+          return false;
+        }
+        if (!phone.value) {
+          alert("Phone is required");
+          scrollToInput(phone);
+          return false;
+        }
+        if (!gender.value) {
+          alert("Gender is required");
+          scrollToInput(gender);
+          return false;
+        }
+        if (!studentLevel.value) {
+          alert("Student level is required");
+          scrollToInput(studentLevel);
+          return false;
+        }
+
+        // ✅ Referral code verification (inline error + scroll)
+        if (referralCode && !validReferralCodes.includes(referralCode)) {
+          referralError.textContent =
+            "Invalid referral code. Please check and try again.";
+          referralError.style.display = "block";
+          scrollToInput(referralCodeInput);
+          return false;
+        }
+
+        const userData = {
+          name: fullName.value,
+          address: email.value,
+          phone: phone.value,
+          gender: gender.value,
+          type: studentLevel.value,
+          cgpa: cgpa.value,
+          referral_code: referralCode || null,
+          metadata: {
+            courses: selectedCourses,
+          },
+        };
+
+        try {
+          showLoader();
+
+          const response = await fetch(
+            "https://blake-app-8df975e138f6.herokuapp.com/api/v1/harvoxx/summer-tech",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("API request failed");
+          }
+
+          await response.json();
+          hideLoader();
+
+          // ✅ Success card
+          const successCard = document.getElementById("success-message");
+          successCard.style.display = "block";
+
+          document.getElementById("registrationForm").reset();
+
+          setTimeout(() => {
+            successCard.style.display = "none";
+          }, 800);
+        } catch (error) {
+          hideLoader();
+          console.error("Error submitting registration:", error);
+          alert(
+            "There was an error submitting your registration. Please try again."
+          );
+        }
+      }
+
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", handleSubmit);
+    </script>
+  </body>
+</html>
