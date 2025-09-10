@@ -888,7 +888,16 @@
     };
 
     // ✅ Allowed referral codes
-    const validReferralCodes = ["HARVOXX100", "DSP100C3", "SUMMER25"];
+    const validReferralCodes = ["Z3X1Q", "R8V2D", "M9L7K", "A5T0Z", "B6F9W", "X2D4N", "P7Q8C", "J0K5R", "V4M2B", "H9Y6E",
+      "L3C7P", "D1T9V", "S8A2F", "Q5W4M", "N7Z0X", "U9E1J", "G2K8T", "C0L5Y", "Y6R3D", "K8F7H",
+      "T1M9B", "E4D2V", "W9X0P", "O5Q6L", "F3Y7C", "Z8N1K", "R2V4T", "M0A9W", "A6P5D", "B9C2X",
+      "X1L7Q", "P4F0M", "J8T6N", "V0Y3R", "H2K9B", "L7W5E", "D9Z1C", "S3Q8K", "Q0M4T", "N5D7Y",
+      "U8F2P", "G1X9L", "C4A0V", "Y9R6B", "K3P7N", "T0C1W", "E6L8D", "W2T5X", "O9Y0Q", "F5K3M",
+      "Z1W7E", "R7Z2C", "M4Q9K", "A9M0T", "B3D6Y", "X0F1P", "P6X8L", "J2A5V", "V9R0B", "H5P4N",
+      "L0C7W", "D6L2D", "S9T1X", "Q4Y8Q", "N0K5M", "U7W9E", "G9Z0C", "C3Q6K", "Y0M1T", "K6D8Y",
+      "T2F5P", "E9X0L", "W1A7V", "O6R2B", "F0P9N", "Z5C4W", "R0L1D", "M8T6X", "A2Y0Q", "B7K3M",
+      "X9W8E", "P3Z5C", "J0Q1K", "V6M7T", "H8D2Y", "L2F9P", "D5X0L", "S0A6V", "Q7R1B", "N9P8N",
+      "U1C3W", "G4L0D", "C9T7X", "Y2Y5Q", "K0K9M", "T8W4E", "E3Z1C", "W0Q8K", "O5M2T", "F7D0Y"];
 
     // Helper: scroll to invalid input
     function scrollToInput(input) {
@@ -990,7 +999,7 @@
         showLoader();
 
         const response = await fetch(
-          "https://blake-app-8df975e138f6.herokuapp.com/api/v1/harvoxx/summer-tech",
+          "https://healthstack-server-five.vercel.app/api/v1/harvoxx/summer-tech",
           {
             method: "POST",
             headers: {
